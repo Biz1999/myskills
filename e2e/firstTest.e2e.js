@@ -1,4 +1,4 @@
-describe("Meus primeiros testes", () => {
+describe("Home Screen", () => {
   beforeAll(async () => {
     await device.launchApp();
   });
@@ -18,7 +18,10 @@ describe("Meus primeiros testes", () => {
 
     await inputNewSkill.tap();
     await inputNewSkill.typeText("React Native");
-
     await buttonAdd.tap();
+
+    await flatlistSkills.tap();
+
+    expect(element(by.id("flatlist-skills"))).toBeVisible();
   });
 });
