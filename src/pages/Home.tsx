@@ -6,6 +6,8 @@ import {
   TextInput,
   Platform,
   FlatList,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { Button } from "../components/Button";
 import { SkillCard } from "../components/SkillCard";
@@ -52,37 +54,39 @@ export function Home() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title} testID="welcome">
-        Welcome, Alessandro
-      </Text>
-      <Text style={styles.grettings}>{gretting}</Text>
-      <TextInput
-        testID="input-new"
-        style={styles.input}
-        placeholder="New skill"
-        placeholderTextColor="#555"
-        onChangeText={setNewSkill}
-        value={newSkill}
-      />
-      <Button testID="button-add" title="Add" onPress={handleAddNewSkill} />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.container}>
+        <Text style={styles.title} testID="welcome">
+          Welcome, Alessandro
+        </Text>
+        <Text style={styles.grettings}>{gretting}</Text>
+        <TextInput
+          testID="input-new"
+          style={styles.input}
+          placeholder="New skill"
+          placeholderTextColor="#555"
+          onChangeText={setNewSkill}
+          value={newSkill}
+        />
+        <Button testID="button-add" title="Add" onPress={handleAddNewSkill} />
 
-      <Text style={[styles.title, { marginVertical: 50 }]}>My Skills</Text>
+        <Text style={[styles.title, { marginVertical: 50 }]}>My Skills</Text>
 
-      <FlatList
-        testID="flatlist-skills"
-        data={mySkills}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="never"
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <SkillCard
-            skill={item.name}
-            onPress={() => handleRemoveSkill(item.id)}
-          />
-        )}
-      />
-    </View>
+        <FlatList
+          testID="flatlist-skills"
+          data={mySkills}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="never"
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <SkillCard
+              skill={item.name}
+              onPress={() => handleRemoveSkill(item.id)}
+            />
+          )}
+        />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
